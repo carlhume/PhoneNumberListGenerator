@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ContactSpiderTest {
 
     public static final String PROFILE_PAGE_URL = "https://411.ca/person/profile/60444680";
+
     ContactSpider spider;
 
     @BeforeEach

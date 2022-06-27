@@ -11,11 +11,18 @@ public class ContactSpider {
 
     public Contact parseContactFromProfilePage( String page ) throws IOException {
         Contact contact = new Contact();
-        Document webpage = Jsoup.connect( page ).get();
-        contact.setTelephoneNumber( findPhoneNumberOnProfilePage( webpage ) );
-        contact.setFamilyName( findFamilyNameOnProfilePage( webpage ) );
-        contact.setGivenName( findGivenNameOnProfilePage( webpage ) );
-        contact.setAddress( parseAddressFromProfilePage( webpage ) );
+        try {
+            Document webpage = Jsoup.connect( page ).get();
+            contact.setTelephoneNumber( findPhoneNumberOnProfilePage( webpage ) );
+            contact.setFamilyName( findFamilyNameOnProfilePage( webpage ) );
+            contact.setGivenName( findGivenNameOnProfilePage( webpage ) );
+            contact.setAddress( parseAddressFromProfilePage( webpage ) );
+        } catch( IOException e ) {
+            System.out.println( ">> cnh >> Error connecting to page: " + page );
+            throw e;
+        } catch( IllegalArgumentException e ) {
+            System.out.println( ">> cnh >> " + page + " is not a valid URL" );
+        }
         return contact;
     }
 
@@ -84,6 +91,8 @@ public class ContactSpider {
         }
 
         return phoneNumber;
+
+//        return findTextForSpanPropertyOnPage( "telephone", webpage );
     }
 
     public String findGivenNameOnProfilePage( String page ) throws IOException {
