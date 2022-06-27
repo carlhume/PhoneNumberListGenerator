@@ -30,4 +30,14 @@ public class Contact {
     private String givenName;
     private String familyName;
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    private Address address;
+
 }

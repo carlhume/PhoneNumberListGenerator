@@ -29,6 +29,19 @@ public class ContactSpiderTest {
         assertEquals( "16135950717", contact.getTelephoneNumber() );
         assertEquals( "Aabed", contact.getFamilyName() );
         assertEquals( "Bassam", contact.getGivenName() );
+        assertEquals( "4 Milne Cres,", contact.getAddress().getStreetAddress() );
+        assertEquals( "Kanata,", contact.getAddress().getLocality() );
+        assertEquals( "ON", contact.getAddress().getProvince() );
+        assertEquals( "K2K 1H6", contact.getAddress().getPostalCode() );
+    }
+
+    @Test
+    public void testSpiderCanParseAddressFromProfilePage() throws IOException {
+        Address address = spider.parseAddressFromProfilePage( PROFILE_PAGE_URL );
+        assertEquals( "4 Milne Cres,", address.getStreetAddress() );
+        assertEquals( "Kanata,", address.getLocality() );
+        assertEquals( "ON", address.getProvince() );
+        assertEquals( "K2K 1H6", address.getPostalCode() );
     }
 
     @Test

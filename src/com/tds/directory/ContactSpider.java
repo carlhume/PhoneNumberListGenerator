@@ -15,7 +15,22 @@ public class ContactSpider {
         contact.setTelephoneNumber( findPhoneNumberOnProfilePage( webpage ) );
         contact.setFamilyName( findFamilyNameOnProfilePage( webpage ) );
         contact.setGivenName( findGivenNameOnProfilePage( webpage ) );
+        contact.setAddress( parseAddressFromProfilePage( webpage ) );
         return contact;
+    }
+
+    private Address parseAddressFromProfilePage( Document webpage ) {
+        Address address = new Address();
+        address.setStreetAddress( findStreetAddressOnProfilePage( webpage ) );
+        address.setLocality( findLocalityOnProfilePage( webpage ) );
+        address.setProvince( findProvinceOnProfilePage( webpage ) );
+        address.setPostalCode( findPostalCodeOnProfilePage( webpage ) );
+        return address;
+    }
+
+    public Address parseAddressFromProfilePage( String page ) throws IOException {
+        Document webpage = Jsoup.connect( page ).get();
+        return parseAddressFromProfilePage( webpage );
     }
 
     /*
@@ -37,6 +52,23 @@ public class ContactSpider {
           </svg> <span translate="directions">Directions</span> </a></li>
        </ul>
        */
+
+    private String findPostalCodeOnProfilePage( Document webpage ) {
+        return findTextForSpanPropertyOnPage( "postalCode", webpage );
+    }
+
+    private String findProvinceOnProfilePage( Document webpage ) {
+        return findTextForSpanPropertyOnPage( "addressRegion", webpage );
+    }
+
+    private String findLocalityOnProfilePage( Document webpage ) {
+        return findTextForSpanPropertyOnPage( "addressLocality", webpage );
+    }
+
+    private String findStreetAddressOnProfilePage( Document webpage ) {
+        return findTextForSpanPropertyOnPage( "streetAddress", webpage );
+    }
+
     public String findPhoneNumberOnProfilePage( String page ) throws IOException {
         Document webpage = Jsoup.connect( page ).get();
         return findPhoneNumberOnProfilePage( webpage );
