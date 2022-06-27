@@ -7,8 +7,16 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-public class PhoneNumberSpider {
+public class ContactSpider {
 
+    public Contact parseContactFromProfilePage( String page ) throws IOException {
+        Contact contact = new Contact();
+        Document webpage = Jsoup.connect( page ).get();
+        contact.setTelephoneNumber( findPhoneNumberOnProfilePage( webpage ) );
+        contact.setFamilyName( findFamilyNameOnProfilePage( webpage ) );
+        contact.setGivenName( findGivenNameOnProfilePage( webpage ) );
+        return contact;
+    }
 
     /*
        <div class="container">
@@ -30,9 +38,12 @@ public class PhoneNumberSpider {
        </ul>
        */
     public String findPhoneNumberOnProfilePage( String page ) throws IOException {
-        String phoneNumber = null;
         Document webpage = Jsoup.connect( page ).get();
+        return findPhoneNumberOnProfilePage( webpage );
+    }
 
+    private String findPhoneNumberOnProfilePage( Document webpage ) {
+        String phoneNumber = null;
         Elements linksOnPage = webpage.select( "a[href]" );
         for( Element link : linksOnPage ) {
             if( link.attr( "href" ).startsWith( "tel:" ) ) {
@@ -47,8 +58,16 @@ public class PhoneNumberSpider {
         return findTextForSpanPropertyOnPage( "givenName", page );
     }
 
+    private String findGivenNameOnProfilePage( Document webpage ) {
+        return findTextForSpanPropertyOnPage( "givenName", webpage );
+    }
+
     public String findFamilyNameOnProfilePage( String page ) throws IOException {
         return findTextForSpanPropertyOnPage( "familyName", page );
+    }
+
+    private String findFamilyNameOnProfilePage( Document webpage ) {
+        return findTextForSpanPropertyOnPage( "familyName", webpage );
     }
 
     private String findTextForSpanPropertyOnPage( String property, String page ) throws IOException {
