@@ -16,13 +16,7 @@ public class ContactSpiderTest {
     public void setUp() {
         spider = new ContactSpider();
     }
-/*
-    @Test
-    public void testSpiderCanConnectToSite() throws IOException {
-        PhoneNumberSpider spider = new PhoneNumberSpider();
-        assertTrue( spider.connectTo( "https://411.ca/white-pages/on/kanata" ) );
-    }
-*/
+
     @Test
     public void testSpiderCanParseContactFromProfilePage() throws IOException {
         Contact contact = spider.parseContactFromProfilePage( PROFILE_PAGE_URL );
