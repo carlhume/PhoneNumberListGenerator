@@ -41,11 +41,5 @@ public class PhoneDirectorySpiderTest {
         Collection<Contact> contacts = spider.findContactsFromCityPage( "https://411.ca/white-pages/on/kanata/p1" );
         assertEquals( 74, contacts.size() );
         assertEquals( "16135910349", contacts.iterator().next().getTelephoneNumber() );
-
-        Set<String> postalCodes = new HashSet<>();
-        for( Contact contact : contacts ) {
-            postalCodes.add( contact.getAddress().getPostalCode() );
-        }
-        System.out.println( ">> cnh >> Found " + postalCodes.size() + " unique postal codes" );
     }
 }

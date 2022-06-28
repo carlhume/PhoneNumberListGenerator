@@ -127,30 +127,4 @@ public class ContactSpider {
         return text;
     }
 
-    /*
-    public boolean connectTo( String url ) throws IOException {
-        boolean connectedCleanly = false;
-        Document webpage = Jsoup.connect( url ).get();
-
-        //System.out.println( ">> cnh >> page: " + webpage );
-
-        Elements lists = webpage.select( "ul" );
-        System.out.println( ">> cnh >> Lists Found: " + lists.size() );
-        for( Element list : lists ) {
-            if( list.hasClass( "ng-star-inserted" ) ) {
-                System.out.println( ">> cnh >> Found list of potential names" );
-                Elements listItems = list.children();
-                for( Element listItem : listItems ) {
-                    //System.out.println( ">> cnh >> list Item: " + listItem );
-                    Element link = listItem.child( 0 );
-                    System.out.println( ">> cnh >> link: " + link.attr( "href" ) );
-                    System.out.println( ">> cnh >> Absolute URL: " + url + "/" + link.text() );
-                    System.out.println( ">> cnh >> name: " + link.text() );
-                }
-            }
-        }
-        connectedCleanly = webpage != null;
-        return connectedCleanly;
-    }
-*/
 }
