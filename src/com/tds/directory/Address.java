@@ -49,4 +49,14 @@ public class Address {
     }
 
     private int addressId;
+
+    public String getFoundOnPage() {
+        return foundOnPage;
+    }
+
+    public void setFoundOnPage(String foundOnPage) {
+        this.foundOnPage = foundOnPage;
+    }
+
+    private String foundOnPage;
 }

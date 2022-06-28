@@ -10,4 +10,5 @@ public class PhoneNumberListGeneratorTest {
     public void testGeneratorCanBeCreated() {
         assertNotNull( new PhoneNumberListGenerator() );
     }
+
 }

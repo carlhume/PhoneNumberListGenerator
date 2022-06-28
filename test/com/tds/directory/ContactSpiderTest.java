@@ -54,4 +54,15 @@ public class ContactSpiderTest {
         assertEquals( "Aabed", spider.findFamilyNameOnProfilePage( PROFILE_PAGE_URL ) );
     }
 
+    @Test
+    public void testSpiderRecordsWhereItFoundTheContact() throws IOException {
+        assertEquals( PROFILE_PAGE_URL, spider.parseContactFromProfilePage( PROFILE_PAGE_URL ).getFoundOnPage() );
+    }
+
+    @Test
+    public void testSpiderRecordsWhereItFoundTheAddress() throws IOException {
+        assertEquals( PROFILE_PAGE_URL, spider.parseContactFromProfilePage( PROFILE_PAGE_URL ).getAddress().getFoundOnPage() );
+    }
+
+
 }

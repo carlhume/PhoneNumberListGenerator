@@ -14,13 +14,21 @@ public class PhoneDirectorySpider {
     public Contact findContactOnContactPage( String page ) throws IOException {
         Contact contact;
         ContactSpider contactSpider = new ContactSpider();
-        String profileLink = findProfileLinkOnPage( page );
 
-        if( profileLink != null ) {
-            contact = contactSpider.parseContactFromProfilePage( profileLink );
-        } else {
+        // TODO: Cleanup
+        // If the parse fails for an unexpected reason, the entire process grinds to a halt
+        // Use the Broken behavior for now to address.
+        try {
+            String profileLink = findProfileLinkOnPage( page );
+            if( profileLink != null ) {
+                contact = contactSpider.parseContactFromProfilePage( profileLink );
+            } else {
+                throw new BrokenPageException( page );
+            }
+        } catch( IOException e ) {
             throw new BrokenPageException( page );
         }
+
         return contact;
     }
 
@@ -56,6 +64,12 @@ public class PhoneDirectorySpider {
                 contacts.add( findContactOnContactPage( url ) );
             } catch( BrokenPageException e ) {
                 System.out.println( ">> cnh >> Could not load details since " + e );
+            }
+
+            try {
+                Thread.sleep(100);
+            } catch( InterruptedException e ) {
+                // Expected
             }
         }
         return contacts;

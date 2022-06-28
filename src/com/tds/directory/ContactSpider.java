@@ -17,6 +17,8 @@ public class ContactSpider {
             contact.setFamilyName( findFamilyNameOnProfilePage( webpage ) );
             contact.setGivenName( findGivenNameOnProfilePage( webpage ) );
             contact.setAddress( parseAddressFromProfilePage( webpage ) );
+            contact.getAddress().setFoundOnPage( page );
+            contact.setFoundOnPage( page );
         } catch( IOException e ) {
             System.out.println( ">> cnh >> Error connecting to page: " + page );
             throw e;

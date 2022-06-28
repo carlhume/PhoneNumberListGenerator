@@ -50,4 +50,13 @@ public class Contact {
 
     private int contactId;
 
+    public String getFoundOnPage() {
+        return foundOnPage;
+    }
+
+    public void setFoundOnPage(String foundOnPage) {
+        this.foundOnPage = foundOnPage;
+    }
+
+    private String foundOnPage;
 }
