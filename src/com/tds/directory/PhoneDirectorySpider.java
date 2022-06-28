@@ -67,7 +67,8 @@ public class PhoneDirectorySpider {
         if( links.size() == 0 ) {
             links = webpage.select( "a.ng-tns-c17-1" );
         }
-        //If we still don't have any links, print out the page for troubleshooting
+        // If we still don't have any links, print out the page for troubleshooting
+        // >> cnh >> TODO:  Add Logging
         if (links.size() == 0) {
             System.out.println(webpage);
         }
