@@ -17,6 +17,8 @@ public class Repository {
         String INSERT_SQL = "INSERT INTO Contacts( phone_number, given_name, family_name ) VALUES( ?, ?, ? )";
 
         String url = "jdbc:mysql://localhost:3306/phone_directory";
+        String username = "carl";
+        String password = "pA$$w0rd";
 
         try {
             Connection connection = DriverManager.getConnection( url, username, password );
