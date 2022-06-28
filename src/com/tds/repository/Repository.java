@@ -51,7 +51,9 @@ public class Repository {
     public Contact getContactForPhoneNumber( String phoneNumber ) {
         Contact contact = new Contact();
         int contactAddressId = 0;
-        String SELECT_CONTACT_SQL = "SELECT phone_number, given_name, family_name, address_id FROM Contacts where phone_number=?";
+        // Always return the contact that was most recently created
+        // >> cnh >> TODO:  Consider if this is the appropriate behavior
+        String SELECT_CONTACT_SQL = "SELECT phone_number, given_name, family_name, address_id FROM Contacts where phone_number=? ORDER BY created_at DESC";
 
         try {
             Connection connection = DriverManager.getConnection( DATABASE_CONNECTION_URL, DATABASE_USERNAME, DATABASE_PASSWORD );
