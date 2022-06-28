@@ -40,4 +40,13 @@ public class Address {
 
     private String province;
 
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
+
+    private int addressId;
 }

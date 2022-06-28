@@ -40,4 +40,14 @@ public class Contact {
 
     private Address address;
 
+    public int getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
+    }
+
+    private int contactId;
+
 }
