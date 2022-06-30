@@ -2,6 +2,25 @@ package com.tds.directory;
 
 public class Contact {
 
+    public boolean matches( Contact anotherContact ) {
+        return telephoneNumberMatches( anotherContact ) && givenNameMatches( anotherContact ) && familyNameMatches( anotherContact );
+    }
+
+    private boolean telephoneNumberMatches( Contact anotherContact ) {
+        return ( getTelephoneNumber() == null && anotherContact.getTelephoneNumber() == null )
+                || ( getTelephoneNumber() != null && getTelephoneNumber().equals( anotherContact.getTelephoneNumber() ) );
+    }
+
+    private boolean givenNameMatches( Contact anotherContact ) {
+        return ( getGivenName() == null && anotherContact.getGivenName() == null )
+                || ( getGivenName() != null && getGivenName().equals( anotherContact.getGivenName() ) );
+    }
+
+    private boolean familyNameMatches( Contact anotherContact ) {
+        return ( getFamilyName() == null && anotherContact.getFamilyName() == null )
+                || ( getFamilyName() != null && getFamilyName().equals( anotherContact.getFamilyName() ) );
+    }
+
     public String getTelephoneNumber() {
         return telephoneNumber;
     }

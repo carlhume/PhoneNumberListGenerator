@@ -44,7 +44,23 @@ public class PhoneDirectorySpider {
 
     public Collection<String> findContactPagesFromCityPage( String page ) throws IOException {
         Collection<String> contactPages = new ArrayList<>();
-        Document webpage = Jsoup.connect( page ).get();
+        Document webpage;
+        try {
+            webpage = Jsoup.connect(page).get();
+        } catch( IOException e ) {
+            System.out.println( ">> cnh >> failed to connect to page: " + page );
+            e.printStackTrace();
+            System.out.println( ">> cnh >> Trying again ... " );
+
+            // If we're not able to connect to the page, we want to wait 10 seconds and try again
+            try {
+                Thread.currentThread().sleep( 10000 );
+            } catch (InterruptedException ex) {
+                // Expected case
+            }
+            webpage = Jsoup.connect(page).get();
+        }
+
         Elements links = findLinksToContactPages(webpage);
         for( Element link : links ) {
             if( isContactPageLink( link )) {
@@ -67,7 +83,7 @@ public class PhoneDirectorySpider {
             }
 
             try {
-                Thread.sleep(100);
+                Thread.currentThread().sleep( 100 );
             } catch( InterruptedException e ) {
                 // Expected
             }
