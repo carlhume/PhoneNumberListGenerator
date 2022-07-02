@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PhoneDirectorySpiderTest {
 
@@ -18,14 +19,17 @@ public class PhoneDirectorySpiderTest {
     }
 
     @Test
-    public void testFindProfileLinkOnContactPage() throws IOException {
-        assertEquals( "https://411.ca/person/profile/60444680", spider.findProfileLinkOnPage( "https://411.ca/white-pages/on/kanata/aabed" ) );
+    public void testFindsMultipleProfileLinksOnContactPageWhenTheyArePresent() throws IOException {
+        Collection<String> links = spider.findProfileLinksOnPage( "https://411.ca/white-pages/on/tweed/bentley" );
+        assertEquals( 2, links.size() );
+        assertTrue( links.contains( "https://411.ca/person/profile/58587044" ) );
+        assertTrue( links.contains( "https://411.ca/person/profile/59812380" ) );
     }
 
     @Test
-    public void testParsingContactFromContactPage() throws IOException {
-        Contact contact =  spider.findContactOnContactPage( "https://411.ca/white-pages/on/kanata/aabed" );
-        assertEquals( "16135950717", contact.getTelephoneNumber() );
+    public void testParsingMultipleContactsFromContactPage() throws BrokenPageException {
+        Collection<Contact> contacts = spider.findContactsOnContactPage( "https://411.ca/white-pages/on/tweed/bentley" );
+        assertEquals( 2, contacts.size() );
     }
 
     @Test
@@ -37,7 +41,7 @@ public class PhoneDirectorySpiderTest {
     @Test
     public void testParseAllContactsFromCityPage() throws IOException {
         Collection<Contact> contacts = spider.findContactsFromCityPage( "https://411.ca/white-pages/on/kanata/p1" );
-        assertEquals( 74, contacts.size() );
+        assertEquals( 101, contacts.size() );
         assertEquals( "16135910349", contacts.iterator().next().getTelephoneNumber() );
     }
 }

@@ -11,35 +11,34 @@ import java.util.Collection;
 
 public class PhoneDirectorySpider {
 
-    public Contact findContactOnContactPage( String page ) throws IOException {
-        Contact contact;
-        ContactSpider contactSpider = new ContactSpider();
-
-        // TODO: Cleanup
-        // If the parse fails for an unexpected reason, the entire process grinds to a halt
-        // Use the Broken behavior for now to address.
+    public Collection<Contact> findContactsOnContactPage( String page ) throws BrokenPageException {
+        Collection<Contact> contacts = new ArrayList<>();
         try {
-            String profileLink = findProfileLinkOnPage( page );
-            if( profileLink != null ) {
-                contact = contactSpider.parseContactFromProfilePage( profileLink );
-            } else {
+            Collection<String> profileLinks = findProfileLinksOnPage( page );
+
+            // TODO:  Consider removing this behavior ...
+            if( profileLinks.size() == 0 ) {
                 throw new BrokenPageException( page );
+            }
+
+            ContactSpider contactSpider = new ContactSpider();
+            for( String profileLink : profileLinks ) {
+                contacts.add( contactSpider.parseContactFromProfilePage( profileLink ) );
             }
         } catch( IOException e ) {
             throw new BrokenPageException( page );
         }
-
-        return contact;
+        return contacts;
     }
 
-    public String findProfileLinkOnPage( String page ) throws IOException {
-        String profileLink = null;
+    public Collection<String> findProfileLinksOnPage( String page ) throws IOException {
+        Collection<String> profileLinks = new ArrayList<>();
         Document webpage = Jsoup.connect( page ).get();
         Elements links = webpage.select( "a.listing-card-link" );
         for( Element link : links ) {
-            profileLink = link.attr("abs:href" );
+            profileLinks.add( link.attr("abs:href" ) );
         }
-        return profileLink;
+        return profileLinks;
     }
 
     public Collection<String> findContactPagesFromCityPage( String page ) throws IOException {
@@ -58,7 +57,25 @@ public class PhoneDirectorySpider {
             } catch (InterruptedException ex) {
                 // Expected case
             }
-            webpage = Jsoup.connect(page).get();
+
+            try {
+                webpage = Jsoup.connect(page).get();
+            } catch( IOException anotherException ) {
+                System.out.println(">> cnh >> failed to connect to page after waiting: " + page);
+                anotherException.printStackTrace();
+                System.out.println(">> cnh >> Trying again one more time ... ");
+
+
+                // If we're still not able to connect, lets wait for a minute
+                try {
+                    Thread.currentThread().sleep(60000);
+                } catch (InterruptedException ex) {
+                    // Expected case
+                }
+
+                // If we still can't get the page at this point, we'll stop and bail
+                webpage = Jsoup.connect(page).get();
+            }
         }
 
         Elements links = findLinksToContactPages(webpage);
@@ -77,7 +94,7 @@ public class PhoneDirectorySpider {
         for( String url : contactPages ) {
             System.out.println( ">> cnh >> find contact for: " + url );
             try {
-                contacts.add( findContactOnContactPage( url ) );
+                contacts.addAll( findContactsOnContactPage( url ) );
             } catch( BrokenPageException e ) {
                 System.out.println( ">> cnh >> Could not load details since " + e );
             }
