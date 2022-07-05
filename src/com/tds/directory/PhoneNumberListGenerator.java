@@ -47,7 +47,7 @@ public class PhoneNumberListGenerator {
         System.out.println( ">> cnh >> Starting to Generate List" );
 
         Collection<CrawlData> citiesToCrwal = new ArrayList<>();
-        /*
+
         citiesToCrwal.add( new CrawlData( "addison", 1 ) );
         citiesToCrwal.add( new CrawlData( "akwesasne", 1 ) );
         citiesToCrwal.add( new CrawlData( "alexandria", 8 ) );
@@ -83,7 +83,7 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "brockville", 32 ) );
         citiesToCrwal.add( new CrawlData( "burnstown", 1 ) );
         citiesToCrwal.add( new CrawlData( "burritts-rapids", 1 ) );
-*/
+
         citiesToCrwal.add( new CrawlData( "calabogie", 4 ) );
         citiesToCrwal.add( new CrawlData( "camden-east", 1 ) );
         citiesToCrwal.add( new CrawlData( "cannifton", 1 ) );
@@ -91,7 +91,7 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "cardinal", 4 ) );
         citiesToCrwal.add( new CrawlData( "carleton-place", 18 ) );
         citiesToCrwal.add( new CrawlData( "carlsbad-springs", 3 ) );
-//        citiesToCrwal.add( new CrawlData( "carp", 13 ) );
+        citiesToCrwal.add( new CrawlData( "carp", 13 ) );
         citiesToCrwal.add( new CrawlData( "carrying-place", 4 ) );
         citiesToCrwal.add( new CrawlData( "casselman", 5 ) );
         citiesToCrwal.add( new CrawlData( "chalk-river", 3 ) );
@@ -144,11 +144,11 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "frankford", 8 ) );
         citiesToCrwal.add( new CrawlData( "frankville", 1 ) );
 
-//        citiesToCrwal.add( new CrawlData( "gananoque", 12 ) );
+        citiesToCrwal.add( new CrawlData( "gananoque", 12 ) );
         citiesToCrwal.add( new CrawlData( "gilmour", 4 ) );
         citiesToCrwal.add( new CrawlData( "glen-robertson", 3 ) );
         citiesToCrwal.add( new CrawlData( "glenburnie", 4 ) );
-//        citiesToCrwal.add( new CrawlData( "gloucester", 68 ) );
+        citiesToCrwal.add( new CrawlData( "gloucester", 68 ) );
         citiesToCrwal.add( new CrawlData( "godfrey", 2 ) );
         citiesToCrwal.add( new CrawlData( "golden-lake", 3 ) );
         citiesToCrwal.add( new CrawlData( "greely", 14 ) );
@@ -171,13 +171,13 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "joyceville", 1 ) );
 
         citiesToCrwal.add( new CrawlData( "kaladar", 1 ) );
-//        citiesToCrwal.add( new CrawlData( "kanata", 87 ) );
+        citiesToCrwal.add( new CrawlData( "kanata", 87 ) );
         citiesToCrwal.add( new CrawlData( "kars", 3 ) );
         citiesToCrwal.add( new CrawlData( "kemptville", 19 ) );
         citiesToCrwal.add( new CrawlData( "kenmore", 1 ) );
         citiesToCrwal.add( new CrawlData( "killaloe", 7 ) );
         citiesToCrwal.add( new CrawlData( "kinburn", 5 ) );
-//        citiesToCrwal.add( new CrawlData( "kingston", 105 ) );
+        citiesToCrwal.add( new CrawlData( "kingston", 105 ) );
 
         citiesToCrwal.add( new CrawlData( "lanark", 6 ) );
         citiesToCrwal.add( new CrawlData( "lancaster", 6 ) );
@@ -219,7 +219,7 @@ public class PhoneNumberListGenerator {
 
         citiesToCrwal.add( new CrawlData( "napanee", 16 ) );
         citiesToCrwal.add( new CrawlData( "navan", 7 ) );
-//        citiesToCrwal.add( new CrawlData( "nepean", 126 ) );
+        citiesToCrwal.add( new CrawlData( "nepean", 126 ) );
         citiesToCrwal.add( new CrawlData( "newboro", 1 ) );
         citiesToCrwal.add( new CrawlData( "newburgh", 3 ) );
         citiesToCrwal.add( new CrawlData( "newington", 1 ) );
@@ -230,9 +230,9 @@ public class PhoneNumberListGenerator {
 
         citiesToCrwal.add( new CrawlData( "odessa", 5 ) );
         citiesToCrwal.add( new CrawlData( "ompah", 1 ) );
-//        citiesToCrwal.add( new CrawlData( "orleans", 101 ) );
+        citiesToCrwal.add( new CrawlData( "orleans", 101 ) );
         citiesToCrwal.add( new CrawlData( "osgoode", 7 ) );
-//        citiesToCrwal.add( new CrawlData( "ottawa", 295 ) );
+        citiesToCrwal.add( new CrawlData( "ottawa", 295 ) );
         citiesToCrwal.add( new CrawlData( "oxford-mills", 2 ) );
         citiesToCrwal.add( new CrawlData( "oxford-station", 1 ) );
 
@@ -254,7 +254,7 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "quinte-west", 1 ) );
 
         citiesToCrwal.add( new CrawlData( "ramsayville", 1 ) );
-//        citiesToCrwal.add( new CrawlData( "renfrew", 18 ) );
+        citiesToCrwal.add( new CrawlData( "renfrew", 18 ) );
         citiesToCrwal.add( new CrawlData( "richmond", 11 ) );
         citiesToCrwal.add( new CrawlData( "rideau-ferry", 1 ) );
         citiesToCrwal.add( new CrawlData( "roblin", 1 ) );
@@ -275,7 +275,7 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "snow-road-station", 1 ) );
         citiesToCrwal.add( new CrawlData( "south-lancaster", 1 ) );
         citiesToCrwal.add( new CrawlData( "south-mountain", 4 ) );
-//        citiesToCrwal.add( new CrawlData( "spencerville", 4 ) );
+        citiesToCrwal.add( new CrawlData( "spencerville", 4 ) );
         citiesToCrwal.add( new CrawlData( "springbrook", 1 ) );
         citiesToCrwal.add( new CrawlData( "saint-albert", 2 ) );
         citiesToCrwal.add( new CrawlData( "saint-andrews-west", 2 ) );
@@ -285,7 +285,7 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "saint-anne-de-prescott", 1 ) );
         citiesToCrwal.add( new CrawlData( "stella", 1 ) );
         citiesToCrwal.add( new CrawlData( "stirling", 9 ) );
-//        citiesToCrwal.add( new CrawlData( "stittsville", 39 ) );
+        citiesToCrwal.add( new CrawlData( "stittsville", 39 ) );
         citiesToCrwal.add( new CrawlData( "stonecliffe", 1 ) );
         citiesToCrwal.add( new CrawlData( "summerstown", 2 ) );
         citiesToCrwal.add( new CrawlData( "sydenham", 6 ) );
@@ -295,7 +295,7 @@ public class PhoneNumberListGenerator {
         citiesToCrwal.add( new CrawlData( "tichborne", 1 ) );
         citiesToCrwal.add( new CrawlData( "toledo", 3 ) );
         citiesToCrwal.add( new CrawlData( "trenton", 30 ) );
-//        citiesToCrwal.add( new CrawlData( "tweed", 7 ) );
+        citiesToCrwal.add( new CrawlData( "tweed", 7 ) );
 
         citiesToCrwal.add( new CrawlData( "vanier", 17 ) );
         citiesToCrwal.add( new CrawlData( "vankleek-hill", 5 ) );
