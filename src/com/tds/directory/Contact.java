@@ -4,9 +4,11 @@ public class Contact {
 
     public void updateNameDetails( String name ) {
         if( name != null ) {
+            // Assumption:  Given and family names are separated by spaces.
+            // The last name in the list is the family name, anything previous are given Name(s)
             String[] names = name.split(" ");
-            setGivenName(names[0]);
-            setFamilyName(names[1]);
+            setFamilyName( names[ names.length - 1] );
+            setGivenName( name.substring( 0, name.indexOf( getFamilyName() ) - 1 ) );
         }
     }
 

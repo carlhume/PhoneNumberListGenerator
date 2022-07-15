@@ -35,6 +35,14 @@ public class PhoneDirectorySpider {
         Collection<String> profileLinks = new ArrayList<>();
         Document webpage = Jsoup.connect( page ).get();
         Elements links = webpage.select( "a.listing-card-link" );
+
+        // Different sites have different elements where the profile cards are stored.
+        // If we don't find any with the first approach, fall back to the next
+        // TODO: Refactor to clean this up...
+        if( links.size() == 0 ) {
+            links = webpage.select("a.rsslink-m");
+        }
+
         for( Element link : links ) {
             profileLinks.add( link.attr("abs:href" ) );
         }
@@ -108,12 +116,24 @@ public class PhoneDirectorySpider {
         return contacts;
     }
 
-    private Elements findLinksToContactPages(Document webpage) {
-        //The links to contact pages belong to one of 2 CSS classes that I've detected (so far).
+    private Elements findLinksToContactPages( Document webpage ) {
+        // TODO:  >> cnh >> Cleanup strategies for spidering different sites
+        // The links to contact pages belongs to one of 2 CSS classes that I've detected (so far).
+        // This behavior belongs for 411.ca
         Elements links = webpage.select( "a.ng-tns-c23-1" ); // >> cnh >> check to see if the class changes ...
         if( links.size() == 0 ) {
             links = webpage.select( "a.ng-tns-c17-1" );
         }
+
+        // If we still don't have links, fall back to looking for specific list items instead of links
+        // This behavior is required for Canadapages
+        if( links.size() == 0 ) {
+            Elements listItems = webpage.select( "li.cat-item" );
+            for( Element listItem : listItems ) {
+                links.addAll( listItem.select( "a[href]" ) );
+            }
+        }
+
         // If we still don't have any links, print out the page for troubleshooting
         // >> cnh >> TODO:  Add Logging
         if (links.size() == 0) {

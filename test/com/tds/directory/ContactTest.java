@@ -91,4 +91,12 @@ public class ContactTest {
         assertEquals( "Smith", contact.getFamilyName() );
     }
 
+    @Test
+    public void testNameParsingWithMultipleGivenNames() {
+        Contact contact = new Contact();
+        contact.updateNameDetails( "D J Abbinett" );  // From https://www.canadapages.com/wp/d-j-abbinett-ottawa-on-6137252715/
+        assertEquals( "D J", contact.getGivenName() );
+        assertEquals( "Abbinett", contact.getFamilyName() );
+    }
+
 }
