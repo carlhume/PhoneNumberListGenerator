@@ -2,6 +2,14 @@ package com.tds.directory;
 
 public class Contact {
 
+    public void updateNameDetails( String name ) {
+        if( name != null ) {
+            String[] names = name.split(" ");
+            setGivenName(names[0]);
+            setFamilyName(names[1]);
+        }
+    }
+
     public boolean matches( Contact anotherContact ) {
         return telephoneNumberMatches( anotherContact ) && givenNameMatches( anotherContact ) && familyNameMatches( anotherContact );
     }

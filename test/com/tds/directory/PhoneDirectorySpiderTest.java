@@ -17,9 +17,17 @@ public class PhoneDirectorySpiderTest {
     public void setUp() {
         spider = new PhoneDirectorySpider();
     }
-
+/*
     @Test
-    public void testFindsMultipleProfileLinksOnContactPageWhenTheyArePresent() throws IOException {
+    public void testFindsMultipleProfileLinksOnContactPageWhenTheyArePresentOnCanadapages() throws IOException {
+        Collection<String> links = spider.findProfileLinksOnPage( "https://www.canadapages.com/wp/name/on/ottawa/abbate/" );
+        assertEquals( 2, links.size() );
+        assertTrue( links.contains( "https://www.canadapages.com/wp/antonio-abbate-ottawa-on-6135231425/" ) );
+        assertTrue( links.contains( "https://www.canadapages.com/wp/c-abbate-ottawa-on-6132349154/" ) );
+    }
+*/
+    @Test
+    public void testFindsMultipleProfileLinksOnContactPageWhenTheyArePresentOn411CA() throws IOException {
         Collection<String> links = spider.findProfileLinksOnPage( "https://411.ca/white-pages/on/tweed/bentley" );
         assertEquals( 2, links.size() );
         assertTrue( links.contains( "https://411.ca/person/profile/58587044" ) );

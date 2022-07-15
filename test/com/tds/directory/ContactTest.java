@@ -1,9 +1,9 @@
 package com.tds.directory;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ContactTest {
 
@@ -71,6 +71,24 @@ public class ContactTest {
         anotherContact.setFamilyName( "Jones" );
 
         assertFalse( contact.matches( anotherContact ) );
+    }
+
+    @Test
+    public void testNameParsingWithNullLeavesNameTheSame() {
+        Contact contact = new Contact();
+        contact.setGivenName( "John" );
+        contact.setFamilyName( "Smith" );
+        contact.updateNameDetails( null );
+        assertEquals( "John", contact.getGivenName() );
+        assertEquals( "Smith", contact.getFamilyName() );
+    }
+
+    @Test
+    public void testNameParsingWithGivenNameAndFamilyName() {
+        Contact contact = new Contact();
+        contact.updateNameDetails( "John Smith" );
+        assertEquals( "John", contact.getGivenName() );
+        assertEquals( "Smith", contact.getFamilyName() );
     }
 
 }

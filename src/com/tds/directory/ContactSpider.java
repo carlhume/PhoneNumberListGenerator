@@ -19,6 +19,13 @@ public class ContactSpider {
             contact.setAddress( parseAddressFromProfilePage( webpage ) );
             contact.getAddress().setFoundOnPage( page );
             contact.setFoundOnPage( page );
+
+            // Different sites have different methods for publishing the contact name.
+            // If we were not able to find the name using the first method, fall back to the second
+            if( contact.getFamilyName() == null || contact.getGivenName() == null ) {
+                contact.updateNameDetails( findNameOnProfilePage( webpage ) );
+            }
+
         } catch( IOException e ) {
             System.out.println( ">> cnh >> Error connecting to page: " + page );
             throw e;
@@ -89,12 +96,18 @@ public class ContactSpider {
         for( Element link : linksOnPage ) {
             if( link.attr( "href" ).startsWith( "tel:" ) ) {
                 phoneNumber = link.attr( "href" ).substring( 4 );
+                phoneNumber = removeLeadingPlusIfNecessary( phoneNumber );
             }
         }
 
         return phoneNumber;
+    }
 
-//        return findTextForSpanPropertyOnPage( "telephone", webpage );
+    private String removeLeadingPlusIfNecessary(String phoneNumber) {
+        if( phoneNumber != null && phoneNumber.startsWith( "+" ) ) {
+            phoneNumber = phoneNumber.substring( 1 );
+        }
+        return phoneNumber;
     }
 
     public String findGivenNameOnProfilePage( String page ) throws IOException {
@@ -103,6 +116,10 @@ public class ContactSpider {
 
     private String findGivenNameOnProfilePage( Document webpage ) {
         return findTextForSpanPropertyOnPage( "givenName", webpage );
+    }
+
+    public String findNameOnProfilePage( Document page ) throws IOException {
+        return findTextForSpanPropertyOnPage( "name", page );
     }
 
     public String findFamilyNameOnProfilePage( String page ) throws IOException {

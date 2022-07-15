@@ -19,7 +19,19 @@ public class ContactSpiderTest {
     }
 
     @Test
-    public void testSpiderCanParseContactFromProfilePage() throws IOException {
+    public void testSpiderCanParseContactFromCanadapagesProfilePage() throws IOException {
+        Contact contact = spider.parseContactFromProfilePage( "https://www.canadapages.com/wp/antonio-abbate-ottawa-on-6135231425/" );
+        assertEquals( "16135231425", contact.getTelephoneNumber() );
+        assertEquals( "Abbate", contact.getFamilyName() );
+        assertEquals( "Antonio", contact.getGivenName() );
+        assertEquals( "2 Tammela Crt", contact.getAddress().getStreetAddress() );
+        assertEquals( "Ottawa", contact.getAddress().getLocality() );
+        assertEquals( "ON", contact.getAddress().getProvince() );
+        assertEquals( "K1T2E7", contact.getAddress().getPostalCode() );
+    }
+
+    @Test
+    public void testSpiderCanParseContactFrom411DotCAProfilePage() throws IOException {
         Contact contact = spider.parseContactFromProfilePage( PROFILE_PAGE_URL );
         assertEquals( "16135950717", contact.getTelephoneNumber() );
         assertEquals( "Aabed", contact.getFamilyName() );
