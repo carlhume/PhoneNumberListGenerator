@@ -9,9 +9,9 @@ import java.util.Collection;
 public class PhoneNumberListGenerator {
 
     private final Repository repository;
-    private final PhoneDirectorySpider spider;
+    private final CityPageSpider spider;
 
-    public PhoneNumberListGenerator( PhoneDirectorySpider spiderForCrawling, Repository repositoryForStoringContactData ) {
+    public PhoneNumberListGenerator( CityPageSpider spiderForCrawling, Repository repositoryForStoringContactData ) {
         this.repository = repositoryForStoringContactData;
         this.spider = spiderForCrawling;
     }
@@ -321,7 +321,7 @@ public class PhoneNumberListGenerator {
 
         citiesToCrwal.add( new CrawlData( "yarker", 3 ) );
 
-        PhoneNumberListGenerator generator = new PhoneNumberListGenerator( new PhoneDirectorySpider(), new Repository() );
+        PhoneNumberListGenerator generator = new PhoneNumberListGenerator( new CityPageSpider(), new Repository() );
         generator.storeNewContactsFor( citiesToCrwal );
         System.out.println( ">> cnh >> Finished generating list" );
     }

@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PhoneNumberListGeneratorTest {
 
     private RepositoryStub repository;
-    private PhoneDirectorySpiderStub spider;
+    private CityPageSpiderStub spider;
     private PhoneNumberListGenerator generator;
 
     @BeforeEach
     public void setUp() {
         repository = new RepositoryStub();
-        spider = new PhoneDirectorySpiderStub();
+        spider = new CityPageSpiderStub();
         generator = new PhoneNumberListGenerator( spider, repository );
     }
 
@@ -50,7 +50,7 @@ public class PhoneNumberListGeneratorTest {
         assertEquals( 12, spider.getCrawledPageCounter() );
     }
 
-    private class PhoneDirectorySpiderStub extends PhoneDirectorySpider {
+    private class CityPageSpiderStub extends CityPageSpider {
 
         private int crawledPageCounter;
         private String lastCrawledPage;

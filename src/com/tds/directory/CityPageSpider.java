@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class PhoneDirectorySpider {
+public class CityPageSpider {
 
     public Collection<Contact> findContactsOnContactPage( String page ) throws BrokenPageException {
         Collection<Contact> contacts = new ArrayList<>();
@@ -143,6 +143,7 @@ public class PhoneDirectorySpider {
     }
 
     // The Contact Page currently has empty itemprops for contact page links, but non-empty itemprops for other links
+    // This is a 411.ca property, and works by accident with Canadapages
     private boolean  isContactPageLink(Element link) {
         return link.attr("itemprop").length() == 0;
     }

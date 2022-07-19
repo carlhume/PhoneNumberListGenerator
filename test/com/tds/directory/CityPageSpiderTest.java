@@ -9,13 +9,13 @@ import java.util.Collection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PhoneDirectorySpiderTest {
+public class CityPageSpiderTest {
 
-    private PhoneDirectorySpider spider;
+    private CityPageSpider spider;
 
     @BeforeEach
     public void setUp() {
-        spider = new PhoneDirectorySpider();
+        spider = new CityPageSpider();
     }
 
     @Test

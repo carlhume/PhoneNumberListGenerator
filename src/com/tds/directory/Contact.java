@@ -8,7 +8,11 @@ public class Contact {
             // The last name in the list is the family name, anything previous are given Name(s)
             String[] names = name.split(" ");
             setFamilyName( names[ names.length - 1] );
-            setGivenName( name.substring( 0, name.indexOf( getFamilyName() ) - 1 ) );
+
+            int familyNameIndex = name.indexOf( getFamilyName() ) - 1;
+            if( familyNameIndex >= 1 ) {
+                setGivenName( name.substring( 0, familyNameIndex ) );
+            }
         }
     }
 

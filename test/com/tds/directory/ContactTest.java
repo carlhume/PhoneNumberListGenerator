@@ -99,4 +99,12 @@ public class ContactTest {
         assertEquals( "Abbinett", contact.getFamilyName() );
     }
 
+    @Test
+    public void testNameParsingWithOnlyOneNameIsFamilyName() {
+        Contact contact = new Contact();
+        contact.updateNameDetails( "Lalande" );  // From https://www.canadapages.com/wp/lalande-alfred-on-6136792279/
+        assertEquals( null, contact.getGivenName() );
+        assertEquals( "Lalande", contact.getFamilyName() );
+    }
+
 }
