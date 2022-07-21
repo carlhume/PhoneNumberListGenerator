@@ -51,7 +51,7 @@ public class CityPageSpider {
 
     public Collection<String> findContactPagesFromCityPage( String page ) throws IOException {
         Collection<String> contactPages = new ArrayList<>();
-        Document webpage;
+        Document webpage = null;
         try {
             webpage = Jsoup.connect(page).get();
         } catch( IOException e ) {
@@ -59,31 +59,17 @@ public class CityPageSpider {
             e.printStackTrace();
             System.out.println( ">> cnh >> Trying again ... " );
 
-            // If we're not able to connect to the page, we want to wait 10 seconds and try again
-            try {
-                Thread.currentThread().sleep( 10000 );
-            } catch (InterruptedException ex) {
-                // Expected case
-            }
-
-            try {
-                webpage = Jsoup.connect(page).get();
-            } catch( IOException anotherException ) {
-                System.out.println(">> cnh >> failed to connect to page after waiting: " + page);
-                anotherException.printStackTrace();
-                System.out.println(">> cnh >> Trying again one more time ... ");
-
-
-                // If we're still not able to connect, lets wait for a minute
-                try {
-                    Thread.currentThread().sleep(60000);
-                } catch (InterruptedException ex) {
-                    // Expected case
-                }
-
+            // If we're not able to connect to the page immediately, we want to wait a while and try again
+            // We're not going full exponential backoff - keeping it simple for the moment
+            webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 6, 10000 );
+            if( webpage == null ) { webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 60, 60000 ); }
+            if( webpage == null ) { webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 60, 120000 ); }
+            if( webpage == null ) { webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 60, 180000 ); }
+            if( webpage == null ) { webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 60, 240000 ); }
+            if( webpage == null ) { webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 60, 300000 ); }
+            if( webpage == null ) { webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 60, 360000 ); }
+            if( webpage == null ) { webpage = attemptToGetDocumentForPageWithRetriesEveryInterval( page, 60, 420000 ); }
                 // If we still can't get the page at this point, we'll stop and bail
-                webpage = Jsoup.connect(page).get();
-            }
         }
 
         Elements links = findLinksToContactPages(webpage);
@@ -94,6 +80,31 @@ public class CityPageSpider {
         }
 
         return contactPages;
+    }
+
+    private Document attemptToGetDocumentForPageWithRetriesEveryInterval( String page, int retries, int interval ) {
+        Document webpage = null;
+
+        int attemptCounter = 1;
+        while( webpage == null && attemptCounter <= retries ) {
+            try {
+                Thread.currentThread().sleep( interval );
+            } catch (InterruptedException ex) {
+                // Expected case
+            }
+
+            try {
+                System.out.println( ">> cnh >> Attempting to load: " + page + " attempt #" + attemptCounter );
+                webpage = Jsoup.connect(page).get();
+            } catch( IOException yetAnotherException ) {
+                System.out.println(">> cnh >> failed to connect to page after waiting: " + page);
+                yetAnotherException.printStackTrace();
+                System.out.println(">> cnh >> Trying again ... ");
+            }
+            attemptCounter++;
+        }
+
+        return webpage;
     }
 
     public Collection<Contact> findContactsFromCityPage( String page ) throws IOException {

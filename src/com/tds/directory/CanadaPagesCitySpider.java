@@ -260,7 +260,6 @@ public class CanadaPagesCitySpider {
 
         spider.storeNewContactsFor( "napanee" );
         spider.storeNewContactsFor( "navan" );
- */
         spider.storeNewContactsFor( "nepean" );
         spider.storeNewContactsFor( "newboro" );
         spider.storeNewContactsFor( "newburgh" );
@@ -274,7 +273,7 @@ public class CanadaPagesCitySpider {
         spider.storeNewContactsFor( "ompah" );
         spider.storeNewContactsFor( "orleans" );
         spider.storeNewContactsFor( "osgoode" );
-        spider.storeNewContactsFor( "ottawa" );
+*/
         spider.storeNewContactsFor( "oxford-mills" );
         spider.storeNewContactsFor( "oxford-station" );
 
@@ -363,7 +362,8 @@ public class CanadaPagesCitySpider {
 
         spider.storeNewContactsFor( "yarker" );
 
-        System.out.println( ">> cnh >> Finished generating list" );
-        }
+        spider.storeNewContactsFor( "ottawa" );
 
-        }
+        System.out.println( ">> cnh >> Finished generating list" );
+    }
+}
