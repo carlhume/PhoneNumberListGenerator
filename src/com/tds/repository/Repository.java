@@ -12,8 +12,8 @@ public class Repository {
  * This class will fail to run until the database variables are introduced.
  */
     private static final String DATABASE_CONNECTION_URL = "jdbc:mysql://localhost:3306/phone_directory";
-    private static final String DATABASE_USERNAME = "carl";
-    private static final String DATABASE_PASSWORD = "pA$$w0rd";
+    private static final String DATABASE_USERNAME = "";
+    private static final String DATABASE_PASSWORD = "";
 
     // >> cnh >> TODO:  Remove coupling to com.tds.directory package ...
      public int store( Contact contact ) {
